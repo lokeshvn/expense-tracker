@@ -41,6 +41,33 @@ def list_expenses():
     conn.close()
     return rows
 
+def update_expense(expense_id, amount, category, date, note=""):
+    init_db()
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        UPDATE expenses
+        SET amount = ?, category = ?, date = ?, note = ?
+        WHERE id = ?
+        """,
+        (amount, category, date, note, expense_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def delete_expense(expense_id):
+    init_db()
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM expenses WHERE id = ?", (expense_id,))
+    conn.commit()
+    conn.close()
+
 
 if __name__ == "__main__":
     # quick manual test
