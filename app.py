@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from services.expenses import add_expense, list_expenses, update_expense, delete_expense
 
+from services.reports import show_category_bar_chart
+
 
 
 def refresh_listbox():
@@ -116,6 +118,11 @@ update_button.grid(row=4, column=1, pady=10)
 
 delete_button = tk.Button(root, text="Delete", command=on_delete_click)
 delete_button.grid(row=4, column=2, padx=5, pady=10)
+
+
+
+report_button = tk.Button(root, text="Show Category Report", command=show_category_bar_chart)
+report_button.grid(row=4, column=3, padx=5, pady=10)
 
 
 # listbox
