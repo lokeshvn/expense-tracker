@@ -35,7 +35,7 @@ def on_add_click():
         add_expense(amount_value, category_value, date_value, note_value)
         messagebox.showinfo("Success", "Expense added")
         amount_entry.delete(0, tk.END)
-        category_entry.delete(0, tk.END)
+        category_combobox.delete(0, tk.END)
         date_entry.delete(0, tk.END)
         note_entry.delete(0, tk.END)
         refresh_listbox()
@@ -123,7 +123,7 @@ def on_update_click():
         refresh_listbox()
         # clear fields
         amount_entry.delete(0, tk.END)
-        category_entry.delete(0, tk.END)
+        category_combobox.delete(0, tk.END)
         date_entry.delete(0, tk.END)
         note_entry.delete(0, tk.END)
     except Exception as e:
@@ -139,7 +139,7 @@ def on_delete_click():
         messagebox.showinfo("Success", "Expense deleted")
         # clear fields
         amount_entry.delete(0, tk.END)
-        category_entry.delete(0, tk.END)
+        category_combobox.delete(0, tk.END)
         date_entry.delete(0, tk.END)
         note_entry.delete(0, tk.END)
         refresh_listbox()
@@ -180,8 +180,9 @@ def on_listbox_select(event):
         date_entry.delete(0, tk.END)
         date_entry.insert(0, parts[1])
 
-        category_entry.delete(0, tk.END)
-        category_entry.insert(0, parts[2])
+        category_combobox.delete(0, tk.END)
+        category_combobox.insert(0, parts[2])
+
 
         amount_entry.delete(0, tk.END)
         amount_entry.insert(0, parts[3])
