@@ -21,6 +21,15 @@ def init_db():
         )
         """
     )
+
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS categories (
+            name TEXT PRIMARY KEY
+        )
+        """
+         )
+
     conn.commit()
     conn.close()
 

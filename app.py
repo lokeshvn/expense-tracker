@@ -4,6 +4,10 @@ from services.expenses import add_expense, list_expenses, update_expense, delete
 
 from services.reports import show_category_bar_chart
 
+from tkinter import messagebox, ttk
+from services.categories import add_category , list_categories
+
+
 
 
 def refresh_listbox():
@@ -21,7 +25,9 @@ def on_add_click():
         messagebox.showerror("Error", "Amount must be a number")
         return
 
-    category_value = category_entry.get().strip()
+    # category_value = category_entry.get().strip()
+    category_value = category_combobox.get().strip()
+
     date_value = date_entry.get().strip()
     note_value = note_entry.get().strip()
 
@@ -49,9 +55,36 @@ amount_entry = tk.Entry(root)
 amount_entry.grid(row=0, column=1, padx=5, pady=5)
 
 # category
+# tk.Label(root, text="Category").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+# category_entry = tk.Entry(root)
+# category_entry.grid(row=1, column=1, padx=5, pady=5)
+
+
+def load_categories_into_combobox():
+    categories = list_categories()
+    category_combobox["values"] = categories
+
+# label same as before
 tk.Label(root, text="Category").grid(row=1, column=0, padx=5, pady=5, sticky="e")
-category_entry = tk.Entry(root)
-category_entry.grid(row=1, column=1, padx=5, pady=5)
+category_combobox = ttk.Combobox(root)
+category_combobox.grid(row=1, column=1, padx=5, pady=5)
+load_categories_into_combobox()
+
+
+def on_add_category_click():
+    new_cat = category_combobox.get().strip()
+    if not new_cat:
+        messagebox.showerror("Error", "Type category name in box first")
+        return
+    add_category(new_cat)
+    load_categories_into_combobox()
+    messagebox.showinfo("Success", "Category added")
+
+
+add_cat_button = tk.Button(root, text="Add Category", command=on_add_category_click)
+add_cat_button.grid(row=1, column=2, padx=5, pady=5)
+
+
 
 # date
 tk.Label(root, text="Date (YYYY-MM-DD)").grid(row=2, column=0, padx=5, pady=5, sticky="e")
@@ -77,7 +110,10 @@ def on_update_click():
         messagebox.showerror("Error", "Amount must be a number")
         return
 
-    category_value = category_entry.get().strip()
+    # category_value = category_entry.get().strip()
+    category_value = category_combobox.get().strip()
+
+
     date_value = date_entry.get().strip()
     note_value = note_entry.get().strip()
 
