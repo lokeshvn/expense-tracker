@@ -36,7 +36,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 _Main window_
 
-![Main Window](assets/screenshots/main.png)
+![Main Window](assets/screenshots/window.png)
 
 _Category report_
 
